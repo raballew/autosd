@@ -7,8 +7,7 @@ ARG CONTAINER_TAG=${OS_VARIANT}${OS_VERSION}
 
 FROM ${CONTAINER_IMAGE}:${CONTAINER_TAG}
 
-LABEL com.redhat.component="$NAME" \
-    name="devcontainer" \
+LABEL name="devcontainer" \
     version="0.1" \
     usage="This image can be used with rootful privileged containers"
 
@@ -22,14 +21,11 @@ RUN dnf copr enable -y @centos-automotive-sig/automotive-image-builder-dev && \
     dnf copr enable -y @centos-automotive-sig/osbuild-auto && \
     dnf install -y automotive-image-builder
 
-ARG URL_BASE=https://buildlogs.centos.org/${OS_VERSION}-${OS_NAME}
-
 # enable autosd repositories
-RUN dnf config-manager --add-repo ${URL_BASE}/automotive/$(arch)/packages-main/ && \
-    dnf config-manager --add-repo ${URL_BASE}/autosd/$(arch)/packages-main/
+RUN dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${OS_NAME}/automotive/$(arch)/packages-main/ && \
+    dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${OS_NAME}/autosd/$(arch)/packages-main/
 
 # install osbuild packages
-RUN dnf install -y osbuild osbuild-luks2 osbuild-lvm2 osbuild-ostree \
-    osbuild-tools make sudo git jq qemu-img && \
+RUN dnf install -y osbuild osbuild-luks2 osbuild-lvm2 osbuild-ostree osbuild-tools make sudo git jq qemu-img && \
     dnf install -y --nogpgcheck android-tools osbuild-auto && \
     dnf clean all
