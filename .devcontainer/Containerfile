@@ -8,10 +8,6 @@ ARG OS_NAME
 ARG OS_VARIANT
 ARG OS_VERSION
 
-LABEL name="devcontainer" \
-    version="0.1" \
-    usage="This image can be used with rootful privileged containers"
-
 RUN dnf update -y && \
     dnf install -y 'dnf-command(config-manager)' 'dnf-command(copr)'
 

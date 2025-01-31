@@ -1,4 +1,7 @@
 {
     "build": { "dockerfile": "Containerfile"},
-    "privileged": true
+    "privileged": true,
+    "mounts": [
+        "source=/dev,target=/dev,type=bind,consistency=cached"
+    ]
 }
