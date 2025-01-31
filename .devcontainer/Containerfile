@@ -1,0 +1,36 @@
+ARG OS_NAME=centos
+ARG OS_VARIANT=stream
+ARG OS_VERSION=9
+
+ARG CONTAINER_IMAGE=quay.io/${OS_NAME}/${OS_NAME}
+ARG CONTAINER_TAG=${OS_VARIANT}${OS_VERSION}
+
+FROM ${CONTAINER_IMAGE}:${CONTAINER_TAG}
+
+LABEL com.redhat.component="$NAME" \
+    name="devcontainer" \
+    version="0.1" \
+    usage="This image can be used with rootful privileged containers"
+
+RUN dnf update -y && \
+    dnf install -y 'dnf-command(config-manager)' 'dnf-command(copr)'
+
+# install automotive-image-builder from copr
+# this is done at this stage so it does not conflict with buildlog packages
+RUN dnf copr enable -y @centos-automotive-sig/automotive-image-builder-dev && \
+    dnf copr enable -y @osbuild/osbuild-stable && \
+    dnf copr enable -y @centos-automotive-sig/osbuild-auto && \
+    dnf install -y automotive-image-builder
+
+ARG URL_BASE=https://buildlogs.centos.org/${OS_VERSION}-${OS_NAME}
+
+# enable crb and autosd repositories
+RUN dnf config-manager --set-enabled crb && \
+    dnf config-manager --add-repo ${URL_BASE}/automotive/$(arch)/packages-main/ && \
+    dnf config-manager --add-repo ${URL_BASE}/autosd/$(arch)/packages-main/
+
+# install osbuild packages
+RUN dnf install -y osbuild osbuild-luks2 osbuild-lvm2 osbuild-ostree \
+    osbuild-tools make sudo git jq qemu-img && \
+    dnf install -y --nogpgcheck android-tools osbuild-auto && \
+    dnf clean all
