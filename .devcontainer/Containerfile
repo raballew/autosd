@@ -24,9 +24,8 @@ RUN dnf copr enable -y @centos-automotive-sig/automotive-image-builder-dev && \
 
 ARG URL_BASE=https://buildlogs.centos.org/${OS_VERSION}-${OS_NAME}
 
-# enable crb and autosd repositories
-RUN dnf config-manager --set-enabled crb && \
-    dnf config-manager --add-repo ${URL_BASE}/automotive/$(arch)/packages-main/ && \
+# enable autosd repositories
+RUN dnf config-manager --add-repo ${URL_BASE}/automotive/$(arch)/packages-main/ && \
     dnf config-manager --add-repo ${URL_BASE}/autosd/$(arch)/packages-main/
 
 # install osbuild packages
