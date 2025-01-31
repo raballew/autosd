@@ -2,10 +2,11 @@ ARG OS_NAME=centos
 ARG OS_VARIANT=stream
 ARG OS_VERSION=9
 
-ARG CONTAINER_IMAGE=quay.io/${OS_NAME}/${OS_NAME}
-ARG CONTAINER_TAG=${OS_VARIANT}${OS_VERSION}
+FROM quay.io/${OS_NAME}/${OS_NAME}:${OS_VARIANT}${OS_VERSION}
 
-FROM ${CONTAINER_IMAGE}:${CONTAINER_TAG}
+ARG OS_NAME
+ARG OS_VARIANT
+ARG OS_VERSION
 
 LABEL name="devcontainer" \
     version="0.1" \
@@ -22,8 +23,8 @@ RUN dnf copr enable -y @centos-automotive-sig/automotive-image-builder-dev && \
     dnf install -y automotive-image-builder
 
 # enable autosd repositories
-RUN dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${OS_NAME}/automotive/$(arch)/packages-main/ && \
-    dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${OS_NAME}/autosd/$(arch)/packages-main/
+RUN dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${OS_VARIANT}/automotive/$(arch)/packages-main/ && \
+    dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${OS_VARIANT}/autosd/$(arch)/packages-main/
 
 # install osbuild packages
 RUN dnf install -y osbuild osbuild-luks2 osbuild-lvm2 osbuild-ostree osbuild-tools make sudo git jq qemu-img && \
