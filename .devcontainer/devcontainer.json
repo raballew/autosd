@@ -1,7 +1,5 @@
 {
     "build": { "dockerfile": "Containerfile"},
     "privileged": true,
-    "mounts": [
-        "source=/,target=/host,type=bind"
-    ]
+    "postCreateCommand": "for i in $(seq 0 16); do mknod -m0660 /dev/loop$i b 7 $i; chown root.disk /dev/loop$i; done"
 }
