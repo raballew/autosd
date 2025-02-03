@@ -1,5 +1,13 @@
 {
     "build": { "dockerfile": "Containerfile"},
     "privileged": true,
-    "postStartCommand": "for i in $(seq $(losetup -ln | wc -l) $(($(losetup -ln | wc -l) + 16))); do rm -rf /dev/loop$i; mknod -m0660 /dev/loop$i b 7 $i; chown root.disk /dev/loop$i; done"
+    "postStartCommand": "for i in $(seq $(losetup -ln | wc -l) $(($(losetup -ln | wc -l) + 16))); do rm -rf /dev/loop$i; mknod -m0660 /dev/loop$i b 7 $i; chown root.disk /dev/loop$i; done",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-azuretools.vscode-docker",
+                "ms-vscode.makefile-tools"
+            ]
+        }
+    }
 }
