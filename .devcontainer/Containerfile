@@ -26,3 +26,7 @@ RUN dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${O
 RUN dnf install -y osbuild osbuild-luks2 osbuild-lvm2 osbuild-ostree osbuild-tools make sudo git jq qemu-img && \
     dnf install -y --nogpgcheck android-tools osbuild-auto && \
     dnf clean all
+
+# install devcontainer packages
+RUN dnf install -y qemu-kvm && \
+    dnf clean all
