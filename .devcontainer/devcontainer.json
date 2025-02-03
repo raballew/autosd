@@ -6,7 +6,7 @@
         "vscode": {
             "extensions": [
                 "ms-azuretools.vscode-docker",
-                "ms-vscode.makefile-tools"
+                "rioj7.command-variable"
             ]
         }
     }
