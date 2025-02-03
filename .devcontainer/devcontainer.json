@@ -1,5 +1,5 @@
 {
     "build": { "dockerfile": "Containerfile"},
     "privileged": true,
-    "postCreateCommand": "for i in $(seq $(losetup -ln | wc -l) $(($(losetup -ln | wc -l) + 16))); do rm -rf /dev/loop$i; mknod -m0660 /dev/loop$i b 7 $i; chown root.disk /dev/loop$i; done"
+    "postStartCommand": "for i in $(seq $(losetup -ln | wc -l) $(($(losetup -ln | wc -l) + 16))); do rm -rf /dev/loop$i; mknod -m0660 /dev/loop$i b 7 $i; chown root.disk /dev/loop$i; done"
 }
