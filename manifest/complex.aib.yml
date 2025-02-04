@@ -22,7 +22,7 @@ content:
     - path: /etc/containers/systemd/qm.container.d/publish-port.conf
       text: |
         [Container]
-        PublishPort=8080:8080
+        PublishPort=8080:80
     - path: /usr/share/my_file.txt
       source_path: ../README.md
   chmod_files:
@@ -63,6 +63,7 @@ qm:
           [Container]
           Image=localhost/nginx
           PublishPort=8080:80
+          Network=host
           [Install]
           WantedBy=multi-user.target
 network:

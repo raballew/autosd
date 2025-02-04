@@ -2,21 +2,21 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build OS - Debug",
+            "label": "Build OS",
             "type": "shell",
-            "command": "automotive-image-builder build --distro ${input:distro} --mode ${input:mode} --target ${input:target} --export ${input:export} ${input:manifest-debug} $(dirname ${input:manifest-debug})/$(basename ${input:manifest-debug}).${input:distro}-${input:mode}-${input:target}.$(arch).debug.${input:export}",
+            "command": "automotive-image-builder build --distro ${input:distro} --mode ${input:mode} --target ${input:target} --export ${input:export} ${input:manifest} $(dirname ${input:manifest})/$(basename ${input:manifest}).${input:distro}-${input:mode}-${input:target}.$(arch).${input:export}",
             "problemMatcher": [],
             "group": "build"
         },
         {
-            "label": "Build OS - FuSa",
-            "type": "shell",
-            "command": "automotive-image-builder build --fusa --distro ${input:distro} --mode image --target ${input:target} --export ${input:export} ${input:manifest-fusa} $(dirname ${input:manifest-fusa})/$(basename ${input:manifest-fusa}).${input:distro}-image-${input:target}.$(arch).fusa.${input:export}",
-            "problemMatcher": [],
-            "group": {
-                "kind": "build"
-            }
-        },
+            "type": "meson",
+            "mode": "build",
+            "problemMatcher": [
+                "$meson-gcc"
+            ],
+            "group": "build",
+            "label": "Meson: Build all targets"
+        }
     ],
     "inputs": [
         {
@@ -58,20 +58,11 @@
             ]
         },
         {
-            "id": "manifest-debug",
+            "id": "manifest",
             "type": "command",
             "command": "extension.commandvariable.file.pickFile",
             "args": {
-                "include": "**/*debug*.aib.{yml,yaml}"
-            }
-        },
-        {
-            "id": "manifest-fusa",
-            "type": "command",
-            "command": "extension.commandvariable.file.pickFile",
-            "args": {
-                "include": "**/*.aib.{yml,yaml}",
-                "exclude": "**/*debug*.aib.{yml,yaml}"
+                "include": "**/*.aib.{yml,yaml}"
             }
         },
         {
@@ -79,7 +70,7 @@
             "type": "command",
             "command": "extension.commandvariable.file.pickFile",
             "args": {
-                "include": "**/*debug*.{qcow2}"
+                "include": "**/*.{qcow2}"
             }
         }
     ]

@@ -10,8 +10,8 @@ ARG OS_VERSION
 
 RUN dnf update -y && \
     dnf install -y \
-        'dnf-command(config-manager)' \
-        'dnf-command(copr)'
+    'dnf-command(config-manager)' \
+    'dnf-command(copr)'
 
 # install automotive-image-builder from copr
 # this is done at this stage so it does not conflict with buildlog packages
@@ -20,63 +20,57 @@ RUN dnf config-manager --set-enabled crb && \
     dnf copr enable -y @osbuild/osbuild-stable && \
     dnf copr enable -y @centos-automotive-sig/osbuild-auto && \
     dnf install -y \
-        automotive-image-builder
+    automotive-image-builder
 
 # enable autosd repositories
 RUN dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${OS_VARIANT}/automotive/$(arch)/packages-main/ && \
     dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${OS_VARIANT}/autosd/$(arch)/packages-main/
 
-# install osbuild packages
 RUN dnf install -y \
-        osbuild \
-        osbuild-luks2 \
-        osbuild-lvm2 \
-        osbuild-ostree \
-        osbuild-tools \
-        make \
-        sudo \
-        git \
-        jq \
-        qemu-img && \
+    # Image build packages
+    osbuild \
+    osbuild-luks2 \
+    osbuild-lvm2 \
+    osbuild-ostree \
+    osbuild-tools \
+    make \
+    sudo \
+    git \
+    jq \
+    qemu-img && \
     dnf install -y --nogpgcheck \
-        android-tools\
-        osbuild-auto && \
-    dnf clean all
-
-# install devcontainer packages
-RUN dnf install -y \
-        qemu-kvm && \
-    dnf clean all
-
-# install build tools packages
-RUN dnf install -y \
-        "@Development Tools" \
-        # Some convenience packages \
-        bash-completion \
-        emacs \
-        strace \
-        wget \
-        # Dependencies to build the kernel's RPM \
-        rpm-build \
-        hostname \
-        openssl-devel \
-        bc \
-        binutils-devel \
-        bpftool \
-        clang \
-        dwarves \
-        gcc-plugin-devel \
-        libcap-devel \
-        libcap-ng-devel \
-        libmnl-devel \
-        llvm \
-        net-tools \
-        numactl-devel \
-        perl-devel \
-        python3-devel \
-        python3-docutils \
-        gcc-c++ \
-        meson \
-        ninja-build \
-        rsync && \
-    dnf clean all
+    android-tools\
+    osbuild-auto \
+    # Dependencies to run a VM
+    qemu-kvm \
+    swtmp \
+    # Some convenience packages \
+    "@Development Tools" \
+    bash-completion \
+    emacs \
+    strace \
+    wget \
+    # Dependencies to build the kernel's RPM \
+    rpm-build \
+    hostname \
+    openssl-devel \
+    bc \
+    binutils-devel \
+    bpftool \
+    clang \
+    dwarves \
+    gcc-plugin-devel \
+    libcap-devel \
+    libcap-ng-devel \
+    libmnl-devel \
+    llvm \
+    net-tools \
+    numactl-devel \
+    perl-devel \
+    python3-devel \
+    python3-docutils \
+    gcc-c++ \
+    meson \
+    ninja-build \
+    rsync && \
+    dnf clean all 
