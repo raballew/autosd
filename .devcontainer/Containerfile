@@ -76,9 +76,3 @@ RUN dnf install -y \
         python3-docutils \
         rsync && \
     dnf clean all
-
-# install ytt
-RUN wget -O- https://carvel.dev/install.sh > install.sh && \
-    bash install.sh && \
-    rm -rf install.sh && \
-    ytt completion
