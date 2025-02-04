@@ -15,7 +15,8 @@ RUN dnf update -y && \
 
 # install automotive-image-builder from copr
 # this is done at this stage so it does not conflict with buildlog packages
-RUN dnf copr enable -y @centos-automotive-sig/automotive-image-builder-dev && \
+RUN dnf config-manager --set-enabled crb && \
+    dnf copr enable -y @centos-automotive-sig/automotive-image-builder-dev && \
     dnf copr enable -y @osbuild/osbuild-stable && \
     dnf copr enable -y @centos-automotive-sig/osbuild-auto && \
     dnf install -y \
@@ -74,5 +75,8 @@ RUN dnf install -y \
         perl-devel \
         python3-devel \
         python3-docutils \
+        gcc-c++ \
+        meson \
+        ninja-build \
         rsync && \
     dnf clean all

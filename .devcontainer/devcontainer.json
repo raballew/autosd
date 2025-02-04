@@ -9,7 +9,8 @@
             "extensions": [
                 "ms-azuretools.vscode-docker",
                 "rioj7.command-variable",
-                "webfreak.debug"
+                "mesonbuild.mesonbuild",
+                "ms-vscode.cpptools"
             ]
         }
     }

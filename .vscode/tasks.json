@@ -1,81 +1,86 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Build OS - Debug",
-			"type": "shell",
-			"command": "automotive-image-builder build --distro ${input:distro} --mode ${input:mode} --target ${input:target} --export ${input:export} ${input:manifest-debug} $(dirname ${input:manifest-debug})/$(basename ${input:manifest-debug}).${input:distro}-${input:mode}-${input:target}.$(arch).debug.${input:export}",
-			"problemMatcher": [],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			}
-		},
-		{
-			"label": "Build OS - FuSa",
-			"type": "shell",
-			"command": "automotive-image-builder build --fusa --distro ${input:distro} --mode image --target ${input:target} --export ${input:export} ${input:manifest-fusa} $(dirname ${input:manifest-fusa})/$(basename ${input:manifest-fusa}).${input:distro}-image-${input:target}.$(arch).fusa.${input:export}",
-			"problemMatcher": [],
-			"group": {
-				"kind": "build"
-			}
-		}
-	],
-	"inputs": [
-		{
-			"id": "distro",
-			"description": "",
-			"type": "pickString",
-			"default": "cs9",
-			"options": [
-				"cs9",
-				"autosd"
-			]
-		},
-		{
-			"id": "mode",
-			"description": "",
-			"type": "pickString",
-			"default": "package",
-			"options": [
-				"package",
-				"image"
-			]
-		},
-		{
-			"id": "target",
-			"description": "",
-			"type": "pickString",
-			"default": "qemu",
-			"options": [
-				"qemu"
-			]
-		},
-		{
-			"id": "export",
-			"description": "",
-			"type": "pickString",
-			"default": "qcow2",
-			"options": [
-				"qcow2"
-			]
-		},
-		{
-			"id": "manifest-debug",
-			"type": "command",
-			"command": "extension.commandvariable.file.pickFile",
-			"args": {
-				"include": "**/*debug*.aib.{yml,yaml}"
-			}
-		},
-		{
-			"id": "manifest-fusa",
-			"type": "command",
-			"command": "extension.commandvariable.file.pickFile",
-			"args": {
-				"include": "**/*.aib.{yml,yaml}",
-				"exclude": "**/*debug*.aib.{yml,yaml}"
-			}
-		}
-	]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build OS - Debug",
+            "type": "shell",
+            "command": "automotive-image-builder build --distro ${input:distro} --mode ${input:mode} --target ${input:target} --export ${input:export} ${input:manifest-debug} $(dirname ${input:manifest-debug})/$(basename ${input:manifest-debug}).${input:distro}-${input:mode}-${input:target}.$(arch).debug.${input:export}",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "Build OS - FuSa",
+            "type": "shell",
+            "command": "automotive-image-builder build --fusa --distro ${input:distro} --mode image --target ${input:target} --export ${input:export} ${input:manifest-fusa} $(dirname ${input:manifest-fusa})/$(basename ${input:manifest-fusa}).${input:distro}-image-${input:target}.$(arch).fusa.${input:export}",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+    ],
+    "inputs": [
+        {
+            "id": "distro",
+            "description": "",
+            "type": "pickString",
+            "default": "cs9",
+            "options": [
+                "cs9",
+                "autosd"
+            ]
+        },
+        {
+            "id": "mode",
+            "description": "",
+            "type": "pickString",
+            "default": "package",
+            "options": [
+                "package",
+                "image"
+            ]
+        },
+        {
+            "id": "target",
+            "description": "",
+            "type": "pickString",
+            "default": "qemu",
+            "options": [
+                "qemu"
+            ]
+        },
+        {
+            "id": "export",
+            "description": "",
+            "type": "pickString",
+            "default": "qcow2",
+            "options": [
+                "qcow2"
+            ]
+        },
+        {
+            "id": "manifest-debug",
+            "type": "command",
+            "command": "extension.commandvariable.file.pickFile",
+            "args": {
+                "include": "**/*debug*.aib.{yml,yaml}"
+            }
+        },
+        {
+            "id": "manifest-fusa",
+            "type": "command",
+            "command": "extension.commandvariable.file.pickFile",
+            "args": {
+                "include": "**/*.aib.{yml,yaml}",
+                "exclude": "**/*debug*.aib.{yml,yaml}"
+            }
+        },
+        {
+            "id": "qemu-image",
+            "type": "command",
+            "command": "extension.commandvariable.file.pickFile",
+            "args": {
+                "include": "**/*debug*.{qcow2}"
+            }
+        }
+    ]
 }
