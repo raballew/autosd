@@ -9,14 +9,17 @@ ARG OS_VARIANT
 ARG OS_VERSION
 
 RUN dnf update -y && \
-    dnf install -y 'dnf-command(config-manager)' 'dnf-command(copr)'
+    dnf install -y \
+        'dnf-command(config-manager)' \
+        'dnf-command(copr)'
 
 # install automotive-image-builder from copr
 # this is done at this stage so it does not conflict with buildlog packages
 RUN dnf copr enable -y @centos-automotive-sig/automotive-image-builder-dev && \
     dnf copr enable -y @osbuild/osbuild-stable && \
     dnf copr enable -y @centos-automotive-sig/osbuild-auto && \
-    dnf install -y automotive-image-builder
+    dnf install -y \
+        automotive-image-builder
 
 # enable autosd repositories
 RUN dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${OS_VARIANT}/automotive/$(arch)/packages-main/ && \
@@ -40,7 +43,8 @@ RUN dnf install -y \
     dnf clean all
 
 # install devcontainer packages
-RUN dnf install -y qemu-kvm && \
+RUN dnf install -y \
+        qemu-kvm && \
     dnf clean all
 
 # install build tools packages
@@ -72,3 +76,9 @@ RUN dnf install -y \
         python3-docutils \
         rsync && \
     dnf clean all
+
+# install ytt
+RUN wget -O- https://carvel.dev/install.sh > install.sh && \
+    bash install.sh && \
+    rm -rf install.sh && \
+    ytt completion
