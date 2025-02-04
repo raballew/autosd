@@ -2,7 +2,7 @@ ARG OS_NAME=centos
 ARG OS_VARIANT=stream
 ARG OS_VERSION=9
 
-FROM quay.io/${OS_NAME}/${OS_NAME}:${OS_VARIANT}${OS_VERSION}
+FROM quay.io/${OS_NAME}/${OS_NAME}:${OS_VARIANT}${OS_VERSION}-development
 
 ARG OS_NAME
 ARG OS_VARIANT
@@ -23,10 +23,52 @@ RUN dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${O
     dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${OS_VARIANT}/autosd/$(arch)/packages-main/
 
 # install osbuild packages
-RUN dnf install -y osbuild osbuild-luks2 osbuild-lvm2 osbuild-ostree osbuild-tools make sudo git jq qemu-img && \
-    dnf install -y --nogpgcheck android-tools osbuild-auto && \
+RUN dnf install -y \
+        osbuild \
+        osbuild-luks2 \
+        osbuild-lvm2 \
+        osbuild-ostree \
+        osbuild-tools \
+        make \
+        sudo \
+        git \
+        jq \
+        qemu-img && \
+    dnf install -y --nogpgcheck \
+        android-tools\
+        osbuild-auto && \
     dnf clean all
 
 # install devcontainer packages
 RUN dnf install -y qemu-kvm && \
+    dnf clean all
+
+# install build tools packages
+RUN dnf install -y \
+        "@Development Tools" \
+        # Some convenience packages \
+        bash-completion \
+        emacs \
+        strace \
+        wget \
+        # Dependencies to build the kernel's RPM \
+        rpm-build \
+        hostname \
+        openssl-devel \
+        bc \
+        binutils-devel \
+        bpftool \
+        clang \
+        dwarves \
+        gcc-plugin-devel \
+        libcap-devel \
+        libcap-ng-devel \
+        libmnl-devel \
+        llvm \
+        net-tools \
+        numactl-devel \
+        perl-devel \
+        python3-devel \
+        python3-docutils \
+        rsync && \
     dnf clean all

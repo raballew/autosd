@@ -67,7 +67,7 @@
 			"args": {
 				"include": "**/*debug*.aib.{yml,yaml}"
 			}
-		}
+		},
 		{
 			"id": "manifest-fusa",
 			"type": "command",
