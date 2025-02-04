@@ -20,8 +20,9 @@ RUN dnf config-manager --set-enabled crb && \
     dnf copr enable -y @osbuild/osbuild-stable && \
     dnf copr enable -y @centos-automotive-sig/osbuild-auto && \
     dnf install -y \
-    automotive-image-builder
-
+    automotive-image-builder && \
+    dnf install -y --nogpgcheck\
+    epel-release
 # enable autosd repositories
 RUN dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${OS_VARIANT}/automotive/$(arch)/packages-main/ && \
     dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${OS_VARIANT}/autosd/$(arch)/packages-main/
@@ -43,13 +44,14 @@ RUN dnf install -y \
     osbuild-auto \
     # Dependencies to run a VM
     qemu-kvm \
-    swtmp \
+    swtpm \
     # Some convenience packages \
     "@Development Tools" \
     bash-completion \
     emacs \
     strace \
     wget \
+    fuse-sshfs \
     # Dependencies to build the kernel's RPM \
     rpm-build \
     hostname \
