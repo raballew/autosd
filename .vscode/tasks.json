@@ -2,11 +2,11 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build OS",
             "type": "shell",
             "command": "automotive-image-builder build --distro ${input:distro} --mode ${input:mode} --target ${input:target} --export ${input:export} ${input:manifest} $(dirname ${input:manifest})/$(basename ${input:manifest}).${input:distro}-${input:mode}-${input:target}.$(arch).${input:export}",
             "problemMatcher": [],
-            "group": "build"
+            "group": "build",
+            "label": "AutoSD: Build OS"
         },
         {
             "type": "meson",
@@ -15,7 +15,7 @@
                 "$meson-gcc"
             ],
             "group": "build",
-            "label": "Meson: Build all targets"
+            "label": "Meson: Build Targets"
         }
     ],
     "inputs": [
@@ -63,14 +63,6 @@
             "command": "extension.commandvariable.file.pickFile",
             "args": {
                 "include": "**/*.aib.{yml,yaml}"
-            }
-        },
-        {
-            "id": "qemu-image",
-            "type": "command",
-            "command": "extension.commandvariable.file.pickFile",
-            "args": {
-                "include": "**/*.{qcow2}"
             }
         }
     ]
