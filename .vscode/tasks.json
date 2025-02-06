@@ -12,9 +12,25 @@
             "type": "shell",
             "command": "automotive-image-runner --nographics ${input:image}",
             "problemMatcher": [],
-            "group": "build",
-            "label": "OS: Run"
+            "group": "none",
+            "label": "OS: Run",
+            "isBackground": true,
+            "presentation": {
+                "echo": true,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            }
         },
+        {
+            "type": "shell",
+            "command": "rm -rf ~/.ssh/known_hosts && ssh-keyscan -p 2222 127.0.0.1  >> ~/.ssh/known_hosts && if mountpoint -q /mnt/target; then umount /mnt/target; fi && if test -d /mnt/target; then rm -rf /mnt/target && mkdir -p /mnt/target; fi",
+            "problemMatcher": [],
+            "group": "none",
+            "label": "OS: Setup",
+        }
     ],
     "inputs": [
         {
