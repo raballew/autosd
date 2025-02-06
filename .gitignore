@@ -1,2 +1,4 @@
 **/*.qcow2
 .tpm2_state
+debug
+debug.pub

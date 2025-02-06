@@ -1,19 +1,9 @@
-# This is a more complex example that uses most available option
-# Its not a great initial example to look at
-
-name: complex
+name: debug
 
 content:
-  enable_repos:
-    - devel
-  repos: []
   rpms:
+    - dnf
     - openssh-server
-    - vi
-  container_images:
-    - source: quay.io/fedora/fedora
-      tag: latest
-      name: localhost/auto-apps
   make_dirs:
     - path: /etc/containers/systemd/qm.container.d/
       parents: true
@@ -23,41 +13,30 @@ content:
       text: |
         [Container]
         PublishPort=8080:80
-    - path: /usr/share/my_file.txt
-      source_path: ../README.md
+    - path: /root/.ssh/authorized_keys
+      source_path: /root/.ssh/debug.pub
   chmod_files:
-    - path: /usr/share/my_file.txt
-      mode: "0666"
+    - path: /root/.ssh/authorized_keys
+      mode: "0644"
       recursive: false
   chown_files:
-    - path: /usr/share/my_file.txt
+    - path: /root/.ssh/authorized_keys
       user: root
       group: root
       recursive: false
-  remove_files:
-    - path: /etc/motd
-    - path: /etc/krb5.conf
-  systemd:
-    enabled_services:
-      - systemd-journald.service
 
 qm:
   memory_limit:
-    max: 1G
-    high: 1G
+    max: 50%
+    high: 50%
   content:
-    enable_repos:
-      - debug
-    repos: []
     rpms:
-      - git
+      - dnf
     container_images:
       - source: docker.io/library/nginx
         tag: latest
         name: localhost/nginx
     add_files:
-      - path: /extra_files.json
-        url: https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/extra_files.json
       - path: /etc/containers/systemd/nginx.container
         text: |
           [Container]
@@ -65,6 +44,7 @@ qm:
           Network=host
           [Install]
           WantedBy=multi-user.target
+
 network:
   static: {}
 
@@ -77,23 +57,10 @@ image:
       relative_size: 0.3
 
 auth:
-  # "password"
-  root_password: $6$xoLqEUz0cGGJRx01$H3H/bFm0myJPULNMtbSsOFd/2BnHqHkMD92Sfxd.EKM9hXTWSmELG8cf205l6dktomuTcgKGGtGDgtvHVXSWU.
   sshd_config:
-    PasswordAuthentication: true
+    PasswordAuthentication: false
     PermitRootLogin: true
-  groups:
-    guest:
-      gid: 2000
-
-  users:
-    guest:
-      # "password"
-      password: $6$xoLqEUz0cGGJRx01$H3H/bFm0myJPULNMtbSsOFd/2BnHqHkMD92Sfxd.EKM9hXTWSmELG8cf205l6dktomuTcgKGGtGDgtvHVXSWU.
-      uid: 2000
-      gid: 2000
 
 kernel:
   debug_logging: true
-  cmdline:
-    - some_option
+

@@ -1,5 +1,24 @@
 {
     "version": "0.2.0",
-    "configurations": [],
+    "configurations": [
+        {
+            "type": "gdb",
+            "request": "launch",
+            "name": "Launch Program (SSH)",
+            "target": "${fileBasenameNoExtension}",
+            "cwd": "${workspaceRoot}",
+            "ssh": {
+                "host": "127.0.0.1",
+                "port": 2222,
+                "cwd": "/tmp/working",
+                "keyfile": "/root/.ssh/debug",
+                "user": "root",
+                "sourceFileMap": {
+                    "Launch Program (SSH)": "${workspaceRoot}"
+                }
+            },
+            "valuesFormatting": "parseText"
+        }
+    ],
     "inputs": []
 }
