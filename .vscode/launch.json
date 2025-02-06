@@ -6,20 +6,21 @@
             "request": "launch",
             "name": "Launch Program (SSH)",
             "target": "${fileBasenameNoExtension}",
-            "cwd": "${workspaceRoot}",
+            "cwd": "${fileDirname}",
             "ssh": {
                 "host": "127.0.0.1",
                 "port": 2222,
-                "cwd": "",
                 "keyfile": "/root/.ssh/debug",
+                "cwd": "",
                 "user": "root",
-                "sourceFileMap": {
-                    "Launch Program (SSH)": "${workspaceRoot}"
-                },
                 "forwardX11": false
             },
-            "valuesFormatting": "parseText",
-            "gdbpath": "gdb"
+            "gdbpath": "gdb",
+            "printCalls": true,
+            "autorun": [
+                "set mi-async",
+                "set debuginfod enabled on"
+            ]
         }
     ],
     "inputs": []
