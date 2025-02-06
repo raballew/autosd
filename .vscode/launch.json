@@ -10,14 +10,16 @@
             "ssh": {
                 "host": "127.0.0.1",
                 "port": 2222,
-                "cwd": "/tmp/working",
+                "cwd": "",
                 "keyfile": "/root/.ssh/debug",
                 "user": "root",
                 "sourceFileMap": {
                     "Launch Program (SSH)": "${workspaceRoot}"
-                }
+                },
+                "forwardX11": false
             },
-            "valuesFormatting": "parseText"
+            "valuesFormatting": "parseText",
+            "gdbpath": "gdb"
         }
     ],
     "inputs": []

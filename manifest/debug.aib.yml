@@ -3,6 +3,7 @@ name: debug
 content:
   rpms:
     - dnf
+    - gdb
     - openssh-server
   make_dirs:
     - path: /etc/containers/systemd/qm.container.d/
@@ -32,6 +33,7 @@ qm:
   content:
     rpms:
       - dnf
+      - gdb
     container_images:
       - source: docker.io/library/nginx
         tag: latest
