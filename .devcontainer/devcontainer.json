@@ -10,7 +10,7 @@
                 "ms-azuretools.vscode-docker",
                 "rioj7.command-variable",
                 "mesonbuild.mesonbuild",
-                "ms-vscode.cpptools"
+                "webfreak.debug"
             ]
         }
     }
