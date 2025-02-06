@@ -1,14 +1,5 @@
 {
     "version": "0.2.0",
     "configurations": [],
-    "inputs": [
-        {
-            "id": "image",
-            "type": "command",
-            "command": "extension.commandvariable.file.pickFile",
-            "args": {
-                "include": "**/*.{qcow2}"
-            }
-        }
-    ]
+    "inputs": []
 }

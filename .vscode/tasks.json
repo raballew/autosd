@@ -6,17 +6,15 @@
             "command": "automotive-image-builder build --distro ${input:distro} --mode ${input:mode} --target ${input:target} --export ${input:export} ${input:manifest} $(dirname ${input:manifest})/$(basename ${input:manifest}).${input:distro}-${input:mode}-${input:target}.$(arch).${input:export}",
             "problemMatcher": [],
             "group": "build",
-            "label": "AutoSD: Build OS"
+            "label": "OS: Build"
         },
         {
-            "type": "meson",
-            "mode": "build",
-            "problemMatcher": [
-                "$meson-gcc"
-            ],
+            "type": "shell",
+            "command": "automotive-image-runner --nographics ${input:image}",
+            "problemMatcher": [],
             "group": "build",
-            "label": "Meson: Build Targets"
-        }
+            "label": "OS: Run"
+        },
     ],
     "inputs": [
         {
@@ -63,6 +61,14 @@
             "command": "extension.commandvariable.file.pickFile",
             "args": {
                 "include": "**/*.aib.{yml,yaml}"
+            }
+        },
+        {
+            "id": "image",
+            "type": "command",
+            "command": "extension.commandvariable.file.pickFile",
+            "args": {
+                "include": "**/*.{qcow2}"
             }
         }
     ]

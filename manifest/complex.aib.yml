@@ -62,7 +62,6 @@ qm:
         text: |
           [Container]
           Image=localhost/nginx
-          PublishPort=8080:80
           Network=host
           [Install]
           WantedBy=multi-user.target
