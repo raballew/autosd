@@ -2,41 +2,51 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "gdb",
-            "request": "attach",
-            "name": "Launch ASIL",
-            "gdbpath": "gdb",
-            "executable": "${fileBasenameNoExtension}",
-            "target": "extended-remote 127.0.0.1:2345",
-            "remote": false,
-            "printCalls": true,
-            "autorun": [
-                "set debuginfod enabled on",
-                "b main",
-                "set remote exec-file ${fileBasenameNoExtension}",
-                "run"
+            "name": "Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/build/${fileBasenameNoExtension}",
+            "postRemoteConnectCommands": [
+                {
+                    "description": "Set remote executable for gdb",
+                    "text": "set remote exec-file ${fileBasenameNoExtension}",
+                    "ignoreFailures": false
+                }
             ],
-            "cwd": "${fileDirname}/builddir",
-            "valuesFormatting": "parseText",
+            "MIMode": "gdb",
+            "miDebuggerServerAddress": "${input:target}",
+            "miDebuggerPath": "gdb",
+            "useExtendedRemote": true,
+            "cwd": "${fileDirname}/build",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+            ],
+            "preLaunchTask": "Meson: Build all targets",
         },
-        {
-            "type": "gdb",
-            "request": "attach",
-            "name": "Launch QM",
-            "gdbpath": "gdb",
-            "executable": "${fileBasenameNoExtension}",
-            "target": "extended-remote 127.0.0.1:3456",
-            "remote": false,
-            "printCalls": true,
-            "autorun": [
-                "set debuginfod enabled on",
-                "b main",
-                "set remote exec-file ${fileBasenameNoExtension}",
-                "run"
-            ],
-            "cwd": "${fileDirname}/builddir",
-            "valuesFormatting": "parseText"
-        }
     ],
-    "inputs": []
+    "inputs": [
+        {
+            "id": "target",
+            "type": "command",
+            "command": "extension.commandvariable.pickStringRemember",
+            "args": {
+                "description": "Select Target:",
+                "key": "target",
+                "options": [
+                    {
+                        "label": "VM ASIL",
+                        "value": "127.0.0.1:2345"
+                    },
+                    {
+                        "label": "VM QM",
+                        "value": "127.0.0.1:3456"
+                    },
+                ]
+            }
+        }
+    ]
 }

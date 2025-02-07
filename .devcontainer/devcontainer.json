@@ -11,7 +11,7 @@
                 "ms-azuretools.vscode-docker",
                 "rioj7.command-variable",
                 "mesonbuild.mesonbuild",
-                "webfreak.debug"
+                "ms-vscode.cpptools"
             ]
         }
     }

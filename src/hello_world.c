@@ -1,11 +1,9 @@
 #include <stdio.h>
 
-#define PROJECT_NAME "hello-world"
+#define PROJECT_NAME "src"
 
-int main(int argc, char **argv)
-{
-    if (argc != 1)
-    {
+int main(int argc, char **argv) {
+    if(argc != 1) {
         printf("%s takes no arguments.\n", argv[0]);
         return 1;
     }

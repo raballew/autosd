@@ -11,10 +11,11 @@ content:
       parents: true
       exist_ok: true
   add_files:
-    - path: /etc/containers/systemd/qm.container.d/publish-port.conf
+    - path: /etc/containers/systemd/qm.container.d/debug.conf
       text: |
         [Container]
         PublishPort=3456:3456
+        SeccompProfile=""
     - path: /usr/lib/systemd/system/gdbserver.service
       text: |
         [Unit]
