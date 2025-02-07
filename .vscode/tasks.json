@@ -42,10 +42,15 @@
                 }
             },
             "dependsOn": [
-                "Meson: Build all targets"
+                "Build Targets"
             ],
             "dependsOrder": "sequence",
             "hide": true,
+            "presentation": {
+                "reveal": "silent",
+                "revealProblems": "onProblem",
+                "close": true
+            }
         },
         {
             "type": "shell",
@@ -59,10 +64,28 @@
                 }
             },
             "dependsOn": [
-                "Meson: Build all targets"
+                "Build Targets"
             ],
             "dependsOrder": "sequence",
             "hide": true,
+            "presentation": {
+                "reveal": "silent",
+                "revealProblems": "onProblem",
+                "close": true
+            }
+        },
+        {
+            "type": "shell",
+            "command": "meson compile -C ${workspaceFolder}/src/${config:mesonbuild.buildFolder}",
+            "problemMatcher": [],
+            "group": "build",
+            "label": "Build Targets",
+            "hide": true,
+            "presentation": {
+                "reveal": "silent",
+                "revealProblems": "onProblem",
+                "close": true
+            }
         },
     ],
     "inputs": [
