@@ -17,13 +17,13 @@
                 "run"
             ],
             "cwd": "${fileDirname}/builddir",
-            "valuesFormatting": "parseText"
+            "valuesFormatting": "parseText",
         },
         {
             "type": "gdb",
             "request": "attach",
             "name": "Launch QM",
-            "gdbpath": "/usr/share/gdb",
+            "gdbpath": "gdb",
             "executable": "${fileBasenameNoExtension}",
             "target": "extended-remote 127.0.0.1:3456",
             "remote": false,

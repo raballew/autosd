@@ -2,4 +2,7 @@
     "editor.formatOnSave": true,
     "files.insertFinalNewline": true,
     "mesonbuild.configureOnOpen": true,
+    "mesonbuild.buildFolder": "build",
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/${config:mesonbuild.buildFolder}/compile_commands.json",
+    "C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild"
 }

@@ -7,7 +7,7 @@ user=$4
 
 cleanup() {
     echo "Cleaning up background processes..."
-    kill -9 $(jobs -p)
+    kill -9 $(jobs -p) >/dev/null 2>&1
 }
 
 configure_ssh(){
@@ -36,20 +36,22 @@ configure_ssh(){
             exit 1
         fi
         sleep 5
-    done
-
-    
-    
+    done  
 }
-
 
 # Set trap
 trap cleanup EXIT
 
 # Start your commands in background
-automotive-image-runner --port-forward 2345:2345,3456:3456 --nographics $image &
+automotive-image-runner --port-forward 2345:2345,3456:3456 --nographics $image >/dev/null &
 
-configure_ssh
+configure_ssh >/dev/null 2>&1 &
+
+while kill -0 $! >/dev/null 2>&1; do
+    printf '.' > /dev/tty
+    sleep 2
+done
+echo -n
 
 if mountpoint -q /mnt/target; then umount /mnt/target; fi
 if test -d /mnt/target; then rm -rf /mnt/target; fi 
