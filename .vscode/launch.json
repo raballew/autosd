@@ -8,13 +8,18 @@
             "program": "${fileDirname}/build/${fileBasenameNoExtension}",
             "postRemoteConnectCommands": [
                 {
+                    "description": "Enable debuginfod",
+                    "text": "set debuginfod enabled on",
+                    "ignoreFailures": false
+                },
+                {
                     "description": "Set remote executable for gdb",
                     "text": "set remote exec-file ${fileBasenameNoExtension}",
                     "ignoreFailures": false
                 }
             ],
             "MIMode": "gdb",
-            "miDebuggerServerAddress": "${input:target}",
+            "miDebuggerServerAddress": "${input:target.host}:${input:target.port}",
             "miDebuggerPath": "gdb",
             "useExtendedRemote": true,
             "cwd": "${fileDirname}/build",
@@ -25,27 +30,51 @@
                     "ignoreFailures": true
                 },
             ],
-            "preLaunchTask": "Meson: Build all targets",
+            "preLaunchTask": "${input:target.preLaunchTask}",
         },
     ],
     "inputs": [
         {
-            "id": "target",
+            "id": "target.host",
             "type": "command",
             "command": "extension.commandvariable.pickStringRemember",
             "args": {
                 "description": "Select Target:",
-                "key": "target",
+                "key": "host",
                 "options": [
-                    {
-                        "label": "VM ASIL",
-                        "value": "127.0.0.1:2345"
-                    },
-                    {
-                        "label": "VM QM",
-                        "value": "127.0.0.1:3456"
-                    },
+                    [
+                        "VM ASIL",
+                        {
+                            "host": "127.0.0.1",
+                            "port": "2345",
+                            "preLaunchTask": "Pre-Launch Task ASIL"
+                        }
+                    ],
+                    [
+                        "VM QM",
+                        {
+                            "host": "127.0.0.1",
+                            "port": "3456",
+                            "preLaunchTask": "Pre-Launch Task QM"
+                        }
+                    ]
                 ]
+            }
+        },
+        {
+            "id": "target.port",
+            "type": "command",
+            "command": "extension.commandvariable.remember",
+            "args": {
+                "key": "port"
+            }
+        },
+        {
+            "id": "target.preLaunchTask",
+            "type": "command",
+            "command": "extension.commandvariable.remember",
+            "args": {
+                "key": "preLaunchTask"
             }
         }
     ]

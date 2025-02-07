@@ -4,6 +4,6 @@
     "mesonbuild.configureOnOpen": true,
     "mesonbuild.buildFolder": "build",
     "mesonbuild.formatting.enabled": true,
-    "C_Cpp.default.compileCommands": "/workspaces/autosd/src/build/compile_commands.json",
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/src/${config:mesonbuild.buildFolder}/compile_commands.json",
     "C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild",
 }

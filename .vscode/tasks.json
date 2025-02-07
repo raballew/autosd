@@ -29,7 +29,41 @@
             "icon": {
                 "id": "plug"
             }
-        }
+        },
+        {
+            "type": "shell",
+            "command": "meson install -C ${workspaceFolder}/src/${config:mesonbuild.buildFolder}",
+            "problemMatcher": [],
+            "group": "none",
+            "label": "Pre-Launch Task ASIL",
+            "options": {
+                "env": {
+                    "DESTDIR": "/mnt/target"
+                }
+            },
+            "dependsOn": [
+                "Meson: Build all targets"
+            ],
+            "dependsOrder": "sequence",
+            "hide": true,
+        },
+        {
+            "type": "shell",
+            "command": "meson install -C ${workspaceFolder}/src/${config:mesonbuild.buildFolder}",
+            "problemMatcher": [],
+            "group": "none",
+            "label": "Pre-Launch Task QM",
+            "options": {
+                "env": {
+                    "DESTDIR": "/mnt/target/usr/share/qm/"
+                }
+            },
+            "dependsOn": [
+                "Meson: Build all targets"
+            ],
+            "dependsOrder": "sequence",
+            "hide": true,
+        },
     ],
     "inputs": [
         {
