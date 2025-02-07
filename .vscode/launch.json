@@ -3,24 +3,39 @@
     "configurations": [
         {
             "type": "gdb",
-            "request": "launch",
-            "name": "Launch Program (SSH)",
-            "target": "${fileBasenameNoExtension}",
-            "cwd": "${fileDirname}",
-            "ssh": {
-                "host": "127.0.0.1",
-                "port": 2222,
-                "keyfile": "/root/.ssh/debug",
-                "cwd": "",
-                "user": "root",
-                "forwardX11": false
-            },
+            "request": "attach",
+            "name": "Launch ASIL",
             "gdbpath": "gdb",
+            "executable": "${fileBasenameNoExtension}",
+            "target": "extended-remote 127.0.0.1:2345",
+            "remote": false,
             "printCalls": true,
             "autorun": [
-                "set mi-async",
-                "set debuginfod enabled on"
-            ]
+                "set debuginfod enabled on",
+                "b main",
+                "set remote exec-file ${fileBasenameNoExtension}",
+                "run"
+            ],
+            "cwd": "${fileDirname}/builddir",
+            "valuesFormatting": "parseText"
+        },
+        {
+            "type": "gdb",
+            "request": "attach",
+            "name": "Launch QM",
+            "gdbpath": "/usr/share/gdb",
+            "executable": "${fileBasenameNoExtension}",
+            "target": "extended-remote 127.0.0.1:3456",
+            "remote": false,
+            "printCalls": true,
+            "autorun": [
+                "set debuginfod enabled on",
+                "b main",
+                "set remote exec-file ${fileBasenameNoExtension}",
+                "run"
+            ],
+            "cwd": "${fileDirname}/builddir",
+            "valuesFormatting": "parseText"
         }
     ],
     "inputs": []

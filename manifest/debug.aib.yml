@@ -4,6 +4,7 @@ content:
   rpms:
     - dnf
     - gdb
+    - gdb-gdbserver
     - openssh-server
   make_dirs:
     - path: /etc/containers/systemd/qm.container.d/
@@ -13,7 +14,22 @@ content:
     - path: /etc/containers/systemd/qm.container.d/publish-port.conf
       text: |
         [Container]
-        PublishPort=8080:80
+        PublishPort=3456:3456
+    - path: /usr/lib/systemd/system/gdbserver.service
+      text: |
+        [Unit]
+        Description=GDB Server for Remote Debugging
+        After=network.target
+
+        [Service]
+        Type=simple
+        ExecStart=/usr/bin/gdbserver --multi --debug :2345 
+        Restart=always
+        User=root
+        Group=root
+
+        [Install]
+        WantedBy=multi-user.target
     - path: /root/.ssh/authorized_keys
       source_path: /root/.ssh/debug.pub
   chmod_files:
@@ -34,16 +50,21 @@ qm:
     rpms:
       - dnf
       - gdb
-    container_images:
-      - source: docker.io/library/nginx
-        tag: latest
-        name: localhost/nginx
+      - gdb-gdbserver
     add_files:
-      - path: /etc/containers/systemd/nginx.container
+      - path: /usr/lib/systemd/system/gdbserver.service
         text: |
-          [Container]
-          Image=localhost/nginx
-          Network=host
+          [Unit]
+          Description=GDB Server for Remote Debugging
+          After=network.target
+
+          [Service]
+          Type=simple
+          ExecStart=/usr/bin/gdbserver --multi --debug :3456
+          Restart=always
+          User=root
+          Group=root
+
           [Install]
           WantedBy=multi-user.target
 

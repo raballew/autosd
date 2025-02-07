@@ -47,7 +47,7 @@ configure_ssh(){
 trap cleanup EXIT
 
 # Start your commands in background
-automotive-image-runner --nographics $image &
+automotive-image-runner --port-forward 2345:2345,3456:3456 --nographics $image &
 
 configure_ssh
 
