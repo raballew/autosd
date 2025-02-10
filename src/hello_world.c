@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define PROJECT_NAME "src"
+#define PROJECT_NAME "hello-world"
 
 int main(int argc, char **argv)
 {
