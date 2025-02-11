@@ -61,25 +61,25 @@ The examples in this repository provide fully functional "jump start" projects t
 
 To build from the command line, navigate to one of the project directories (e.g., `executable`, `library`, or `headeronly`), then:
 
-1.  **Initialize the build environment:**
+1.  Initialize the build environment:
 
     ```sh
     meson build
     ```
 
-2.  **Build the project:**
+2.  Build the project:
 
     ```sh
     ninja -C build
     ```
 
-3.  **Run the tests:**
+3.  Run the tests:
 
     ```sh
     ninja -C build test
     ```
 
-4.  **Run the tests with detailed Google Test reporting:**
+4.  Run the tests with detailed Google Test reporting:
 
     ```sh
     ./build/run_tests
