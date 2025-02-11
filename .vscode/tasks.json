@@ -32,7 +32,7 @@
         },
         {
             "type": "shell",
-            "command": "meson install -C ${workspaceFolder}/src/${config:mesonbuild.buildFolder}",
+            "command": "meson install -C ${workspaceFolder}/executable/${config:mesonbuild.buildFolder}",
             "problemMatcher": [],
             "group": "none",
             "label": "Pre-Launch Task ASIL",
@@ -54,7 +54,7 @@
         },
         {
             "type": "shell",
-            "command": "meson install -C ${workspaceFolder}/src/${config:mesonbuild.buildFolder}",
+            "command": "meson install -C ${workspaceFolder}/executable/${config:mesonbuild.buildFolder}",
             "problemMatcher": [],
             "group": "none",
             "label": "Pre-Launch Task QM",
@@ -76,7 +76,7 @@
         },
         {
             "type": "shell",
-            "command": "meson compile -C ${workspaceFolder}/src/${config:mesonbuild.buildFolder}",
+            "command": "meson compile -C ${workspaceFolder}/executable/${config:mesonbuild.buildFolder}",
             "problemMatcher": [],
             "group": "build",
             "label": "Build Targets",
@@ -132,7 +132,7 @@
             "type": "command",
             "command": "extension.commandvariable.file.pickFile",
             "args": {
-                "include": "**/*.aib.{yml,yaml}"
+                "include": ".aib/**/*.aib.{yml,yaml}"
             }
         },
         {
@@ -140,7 +140,7 @@
             "type": "command",
             "command": "extension.commandvariable.file.pickFile",
             "args": {
-                "include": "**/*.{qcow2}"
+                "include": ".aib/**/*.{qcow2}"
             }
         }
     ]

@@ -5,7 +5,7 @@
             "name": "Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/build/${fileBasenameNoExtension}",
+            "program": "${workspaceFolder}/executable/${config:mesonbuild.buildFolder}/myexec",
             "postRemoteConnectCommands": [
                 {
                     "description": "Enable debuginfod",
@@ -14,7 +14,7 @@
                 },
                 {
                     "description": "Set remote executable for gdb",
-                    "text": "set remote exec-file ${fileBasenameNoExtension}",
+                    "text": "set remote exec-file myexec",
                     "ignoreFailures": false
                 }
             ],
@@ -22,7 +22,7 @@
             "miDebuggerServerAddress": "${input:target.host}:${input:target.port}",
             "miDebuggerPath": "gdb",
             "useExtendedRemote": true,
-            "cwd": "${fileDirname}/build",
+            "cwd": "${workspaceFolder}/executable",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -31,6 +31,12 @@
                 },
             ],
             "preLaunchTask": "${input:target.preLaunchTask}",
+            "environment": [
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "/usr/local/lib64"
+                }
+            ]
         },
     ],
     "inputs": [
