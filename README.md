@@ -4,6 +4,10 @@
 
 ## Usage
 
+### Workspace Setup
+
+- `git submodule update --init --recursive` to initalize unit test dependencies
+
 ### Build OS Image
 
 - `Ctrl+Shift+P`, choose `Tasks: Run Task`, select `Image Builder` with the following options:
