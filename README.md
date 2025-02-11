@@ -11,7 +11,7 @@
 
 ### Build OS Image
 
-- `Ctrl+Shift+P`, choose `Tasks: Run Task`, select `Image Builder` with the following options:
+- `Ctrl` + `Shift` + `P`, choose `Tasks: Run Task`, select `Image Builder` with the following options:
   - cs9
   - package
   - qemu
@@ -21,20 +21,20 @@
 
 ### Run OS Image
 
-- `Ctrl+Shift+P`, choose `Tasks: Run Task`, select `Jumpstarter` with the desired OS image.
+- `Ctrl` + `Shift` + `P`, choose `Tasks: Run Task`, select `Jumpstarter` with the desired OS image.
 - Wait a few seconds while the OS is being started. Once completed you should see a terminal with `[root@localhost ~]#`
 
 ### Develop
 
-- `Ctrl+Shift+P`, choose `Meson: Build` and select `All targets`
+- `Ctrl` + `Shift` + `P`, choose `Meson: Build` and select `All targets`
 - Set breakpoints in [myexec.c](executable/src/myexec.c), [headeronly.h](headeronly/include/headeronly.h) and [library.c](library/src/library.c)
 - Make sure a [packages based OS image](#build-os-image) is [still running locally](#run-os-image), then press `F5` to start debugging. Choose whether the application should be debugged in QM or ASIL. Then use the following shortcuts to navigate through the debugger:
   - `F5`: Continue
   - `F10`: Step Over
   - `F11`: Step Into
-  - `Shift+F11`: Step Out
-  - `Ctrl+Shift+F5`: Restart
-  - `Shift+F5`: Stop
+  - `Shift` + `F11`: Step Out
+  - `Ctrl` + `Shift` + `F5`: Restart
+  - `Shift` + `F5`: Stop
 - Finally, edit the source code and hit `F5` again.
 
 ## Meson
