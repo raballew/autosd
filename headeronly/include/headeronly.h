@@ -1,14 +1,15 @@
 #pragma once
 
-#ifdef __cplusplus 
-extern "C" {
+#ifdef __cplusplus
+extern "C"
+{
 #endif
 
-static inline int headeronly_func_returning_99()
-{
-    return 99;
-}
+    static inline int headeronly_func_returning_99()
+    {
+        return 99;
+    }
 
-#ifdef __cplusplus 
+#ifdef __cplusplus
 }
 #endif

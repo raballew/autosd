@@ -9,26 +9,16 @@
 # shouldn't need to modify anything below the line until your project becomes
 # fairly complex.
 
+project('myexec', 'c', version: '1.1.0', default_options: ['warning_level=3'])
 
-project(
-  'myexec',
-  'c',
-  version : '1.1.0',
-  default_options : ['warning_level=3']
-)
-
-project_source_files = [
-  'src/myexec.c'
-]
+project_source_files = ['src/myexec.c']
 
 project_dependencies = [
-  dependency('mylib', fallback : ['mylib', 'mylib_dep']),
-  dependency('headeronly', fallback : ['headeronly', 'headeronly_dep']),
+  dependency('mylib', fallback: ['mylib', 'mylib_dep']),
+  dependency('headeronly', fallback: ['headeronly', 'headeronly_dep']),
 ]
 
-build_args = [
-]
-
+build_args = []
 
 # ===================================================================
 
@@ -45,8 +35,8 @@ project_target = executable(
   meson.project_name(),
   project_source_files,
   dependencies: project_dependencies,
-  install : true,
-  c_args : build_args,
+  install: true,
+  c_args: build_args,
 )
 
 test('basic', project_target)

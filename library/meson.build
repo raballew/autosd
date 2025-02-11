@@ -4,30 +4,18 @@
 # shouldn't need to modify anything below the line until your project becomes
 # fairly complex.
 
-
-project(
-  'mylib',
-  'c',
-  version : '1.0.0',
-  default_options : ['warning_level=3']
-)
+project('mylib', 'c', version: '1.0.0', default_options: ['warning_level=3'])
 project_description = 'An example shared library'
 
-project_headers = [
-  'include/mylib.h'
-]
+project_headers = ['include/mylib.h']
 
-project_source_files = [
-  'src/library.c'
-]
+project_source_files = ['src/library.c']
 
 project_test_files = [
   'tests/src/tests.cpp',
 ]
 
-build_args = [
-]
-
+build_args = []
 
 # ===================================================================
 
@@ -52,37 +40,32 @@ endif
 project_target = shared_library(
   meson.project_name(),
   project_source_files,
-  install : true,
-  c_args : build_args,
-  gnu_symbol_visibility : 'hidden',
-  include_directories : public_headers,
+  install: true,
+  c_args: build_args,
+  gnu_symbol_visibility: 'hidden',
+  include_directories: public_headers,
 )
-
 
 # =======
 # Project
 # =======
 
 # Make this library usable as a Meson subproject.
-project_dep = declare_dependency(
-  include_directories: public_headers,
-  link_with : project_target
-)
+project_dep = declare_dependency(include_directories: public_headers, link_with: project_target)
 set_variable(meson.project_name() + '_dep', project_dep)
 
 # Make this library usable from the system's
 # package manager.
-install_headers(project_headers, subdir : meson.project_name())
+install_headers(project_headers, subdir: meson.project_name())
 
 pkg_mod = import('pkgconfig')
 pkg_mod.generate(
-  name : meson.project_name(),
-  filebase : meson.project_name(),
-  description : project_description,
-  subdirs : meson.project_name(),
-  libraries : project_target,
+  name: meson.project_name(),
+  filebase: meson.project_name(),
+  description: project_description,
+  subdirs: meson.project_name(),
+  libraries: project_target,
 )
-
 
 # ==========
 # Unit Tests
@@ -92,12 +75,13 @@ if not meson.is_subproject()
   add_languages('cpp')
   subdir('tests')
 
-  test('all_tests',
+  test(
+    'all_tests',
     executable(
       'run_tests',
       files(project_test_files),
-      dependencies : [project_dep, test_dep],
-      install : false
-    )
+      dependencies: [project_dep, test_dep],
+      install: false,
+    ),
   )
 endif
