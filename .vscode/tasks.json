@@ -60,7 +60,7 @@
             "label": "Pre-Launch Task QM",
             "options": {
                 "env": {
-                    "DESTDIR": "/mnt/target/usr/share/qm/"
+                    "DESTDIR": "/mnt/target/usr/lib/qm/rootfs/"
                 }
             },
             "dependsOn": [
