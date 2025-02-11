@@ -4,74 +4,94 @@
 
 ### Setup
 
-- Once the IDE has started, ensure the Meson root directory is set to `executable:meson.build`.
-- Run `git submodule update --init --recursive`to initialize unit test dependencies.
+1.  Once the IDE has started, ensure the Meson root directory is set to `executable/meson.build`.
+2.  Run `git submodule update --init --recursive` to initialize unit test dependencies.
 
 ### Build OS Image
 
-- Press Ctrl + Shift + P, select Tasks: Run Task, and choose Image Builder with the following options:
-  - cs9
-  - package
-  - qemu
-  - qcow2
-  - .aib/debug.aib.yml
-- Wait a few minutes while the OS image is being build.
+1.  Press `Ctrl` + `Shift` + `P`.
+2.  Select `Tasks: Run Task`.
+3.  Choose `Image Builder` and configure the following options:
+    *   `cs9`
+    *   `package`
+    *   `qemu`
+    *   `qcow2`
+    *   `.aib/debug.aib.yml`
+4.  Wait for the OS image to build. This may take a few minutes.
 
 ### Run OS Image
 
-- `Ctrl` + `Shift` + `P`, choose `Tasks: Run Task`, select `Jumpstarter` with the desired OS image.
-- Wait a few seconds while the OS is being started. Once completed you should see a terminal with `[root@localhost ~]#`
+1.  Press `Ctrl` + `Shift` + `P`.
+2.  Choose `Tasks: Run Task`.
+3.  Select `Jumpstarter` and choose the desired OS image.
+4.  Wait a few seconds for the OS to start. Once it's running, you should see a terminal prompt: `[root@localhost ~]#`
 
 ### Develop
 
-- `Ctrl` + `Shift` + `P`, choose `Meson: Build` and select `All targets`
-- Set breakpoints in [myexec.c](executable/src/myexec.c), [headeronly.h](headeronly/include/headeronly.h) and [library.c](library/src/library.c)
-- Make sure a [packages based OS image](#build-os-image) is [still running locally](#run-os-image), then press `F5` to start debugging. Choose whether the application should be debugged in QM or ASIL. Then use the following shortcuts to navigate through the debugger:
-  - `F5`: Continue
-  - `F10`: Step Over
-  - `F11`: Step Into
-  - `Shift` + `F11`: Step Out
-  - `Ctrl` + `Shift` + `F5`: Restart
-  - `Shift` + `F5`: Stop
-- Finally, edit the source code and hit `F5` again.
+1.  Press `Ctrl` + `Shift` + `P`.
+2.  Choose `Meson: Build` and select `All targets`.
+3.  Set breakpoints in the following files:
+    *   [executable/src/myexec.c](executable/src/myexec.c)
+    *   [headeronly/include/headeronly.h](headeronly/include/headeronly.h)
+    *   [library/src/library.c](library/src/library.c)
+4.  Ensure a [package-based OS image](#build-os-image) is running locally (see [Run OS Image](#run-os-image)).
+5.  Press `F5` to start debugging. Choose whether to debug the application in `QM` or `ASIL`.
+6.  Use the following shortcuts to control the debugger:
+    *   `F5`: Continue
+    *   `F10`: Step Over
+    *   `F11`: Step Into
+    *   `Shift` + `F11`: Step Out
+    *   `Ctrl` + `Shift` + `F5`: Restart
+    *   `Shift` + `F5`: Stop
+7.  Edit the source code and press `F5` again to test your changes.
 
 ## Meson
 
-[Meson](http://mesonbuild.com), like many projects, has documentation that is heavy on the detail, but weak on the big picture. There are no best practices offered, and questions like "How do I..." require a lot of digging around in the guts.
+[Meson](http://mesonbuild.com), like many build systems, has extensive documentation that can be overwhelming and lacks practical guidance. Best practices are not always clear, and finding answers to specific questions can require significant research.
 
-The opinionated examples in this repository are designed as fully functional "jump start" projects to get you going:
+The examples in this repository provide fully functional "jump start" projects to help you get started with Meson:
 
-* Building a library
-* Building a header-only library
-* Building an executable
-* Setting up dependencies to other projects
-* Testing via google test
+*   Building a library
+*   Building a header-only library
+*   Building an executable
+*   Setting up dependencies between projects
+*   Testing with Google Test
 
-### To build from command line, go into one of the project directories, then:
+### Command Line Usage
 
-To initialize the builder:
+To build from the command line, navigate to one of the project directories (e.g., `executable`, `library`, or `headeronly`), then:
 
+1.  **Initialize the build environment:**
+
+    ```sh
     meson build
+    ```
 
-To build the project from then on:
+2.  **Build the project:**
 
+    ```sh
     ninja -C build
+    ```
 
-To run the tests:
+3.  **Run the tests:**
 
+    ```sh
     ninja -C build test
+    ```
 
-To run the tests with full "google test" reporting:
+4.  **Run the tests with detailed Google Test reporting:**
 
+    ```sh
     ./build/run_tests
+    ```
 
-All build files will be put in the `build` subdir, which is included in `.gitignore`.
+All build files are placed in the `build` subdirectory, which is ignored by Git.
 
 ### Common Features
 
-* Project files are split such that they have a "simple config" section at the top for the most common things you'll want to modify.
-* Projects are structured in an opinionated way.
-* Public APIs are marked public or private (depending on their internal or external use) via `-DMYPROJECT_PUBLIC` defines, which handle windows and unix style visibility specifications.
-* The project name and version are passed to the compiler as `-DPROJECT_NAME` and  `-DPROJECT_VERSION`
-* Project files are already set up to be used as dependencies of other projects, and as packages.
-* The library projects come with example tests.
+*   Project files have a "simple config" section at the top for frequently modified settings.
+*   Projects follow a consistent and opinionated structure.
+*   Public APIs are marked as public or private using `-DMYPROJECT_PUBLIC` defines, which handle visibility specifications for both Windows and Unix-like systems.
+*   The project name and version are passed to the compiler as `-DPROJECT_NAME` and `-DPROJECT_VERSION`.
+*   Project files are configured for use as dependencies in other projects and as installable packages.
+*   Library projects include example tests.
