@@ -15,7 +15,7 @@ content:
       text: |
         [Container]
         PublishPort=3456:3456
-    - path: /usr/lib/systemd/system/gdbserver.service
+    - path: /usr/lib/systemd/system/gdbserver-asil.service
       text: |
         [Unit]
         Description=GDB Server for Remote Debugging
@@ -24,6 +24,23 @@ content:
         [Service]
         Type=simple
         ExecStart=/usr/bin/gdbserver --multi --debug :2345 
+        Restart=always
+        User=root
+        Group=root
+
+        [Install]
+        WantedBy=multi-user.target
+    - path: /usr/lib/systemd/system/gdbserver-qm.service
+      text: |
+        [Unit]
+        Description=GDB Server for Remote Debugging
+        After=network.target
+        After=qm.service
+        Requires=qm.service
+
+        [Service]
+        Type=simple
+        ExecStart=/usr/bin/bash -c "nsenter -t $(podman inspect qm --format='{{.State.Pid}}') -a gdbserver --multi --debug :3456"
         Restart=always
         User=root
         Group=root
@@ -43,7 +60,8 @@ content:
       recursive: false
   systemd:
     enabled_services:
-      - gdbserver.service
+      - gdbserver-asil.service
+      - gdbserver-qm.service
 
 qm:
   memory_limit:
@@ -54,24 +72,6 @@ qm:
       - dnf
       - gdb
       - gdb-gdbserver
-    add_files:
-      - path: /usr/lib/systemd/system/gdbserver.service
-        text: |
-          [Unit]
-          Description=GDB Server for Remote Debugging
-
-          [Service]
-          Type=simple
-          ExecStart=/usr/bin/gdbserver --multi --debug :3456
-          Restart=always
-          User=root
-          Group=root
-
-          [Install]
-          WantedBy=multi-user.target
-    systemd:
-      enabled_services:
-        - gdbserver.service
 
 network:
   static: {}
