@@ -1,5 +1,3 @@
-# Web-based IDE for AutoSD
-
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/raballew/autosd?quickstart=1)
 
 ## Usage
