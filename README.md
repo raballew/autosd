@@ -4,12 +4,12 @@
 
 ### Setup
 
-- Once the IDE is started make sure to select the Meson root directory as `executable:meson.build`
-- `git submodule update --init --recursive` to initalize unit test dependencies
+- Once the IDE has started, ensure the Meson root directory is set to `executable:meson.build`.
+- Run `git submodule update --init --recursive`to initialize unit test dependencies.
 
 ### Build OS Image
 
-- `Ctrl` + `Shift` + `P`, choose `Tasks: Run Task`, select `Image Builder` with the following options:
+- Press Ctrl + Shift + P, select Tasks: Run Task, and choose Image Builder with the following options:
   - cs9
   - package
   - qemu
