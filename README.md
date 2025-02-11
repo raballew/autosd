@@ -4,8 +4,9 @@
 
 ## Usage
 
-### Workspace Setup
+### Setup
 
+- Once the IDE is started make sure to select the Meson root directory as `executable:meson.build`
 - `git submodule update --init --recursive` to initalize unit test dependencies
 
 ### Build OS Image
