@@ -15,7 +15,6 @@ content:
       text: |
         [Container]
         PublishPort=3456:3456
-        SeccompProfile=""
     - path: /usr/lib/systemd/system/gdbserver.service
       text: |
         [Unit]
