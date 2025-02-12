@@ -11,7 +11,7 @@
 
 1.  Press `Ctrl` + `Shift` + `P`.
 2.  Select `Tasks: Run Task`.
-3.  Choose `Image Builder` and configure the following options:
+3.  Choose `OS Builder` and configure the following options:
     *   `cs9`
     *   `package`
     *   `qemu`
