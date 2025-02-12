@@ -6,9 +6,19 @@
             "command": "automotive-image-builder build --distro ${input:distro} --mode ${input:mode} --target ${input:target} --export ${input:export} ${input:manifest} $(dirname ${input:manifest})/$(basename ${input:manifest}).${input:distro}-${input:mode}-${input:target}.$(arch).${input:export}",
             "problemMatcher": [],
             "group": "build",
-            "label": "Image Builder",
+            "label": "OS Builder",
             "icon": {
                 "id": "tools"
+            }
+        },
+        {
+            "type": "shell",
+            "command": "./.vscode/scripts/rpm.sh ${input:specs}",
+            "problemMatcher": [],
+            "group": "build",
+            "label": "RPM Builder",
+            "icon": {
+                "id": "package"
             }
         },
         {
@@ -86,12 +96,12 @@
                 "revealProblems": "onProblem",
                 "close": true
             }
-        },
+        }
     ],
     "inputs": [
         {
             "id": "distro",
-            "description": "",
+            "description": "Select the distribution to build.",
             "type": "pickString",
             "default": "cs9",
             "options": [
@@ -111,7 +121,7 @@
         },
         {
             "id": "target",
-            "description": "",
+            "description": "Select the build target.",
             "type": "pickString",
             "default": "qemu",
             "options": [
@@ -120,7 +130,7 @@
         },
         {
             "id": "export",
-            "description": "",
+            "description": "Select the export format.",
             "type": "pickString",
             "default": "qcow2",
             "options": [
@@ -132,6 +142,7 @@
             "type": "command",
             "command": "extension.commandvariable.file.pickFile",
             "args": {
+                "description": "Select the OS manifest file to build.",
                 "include": ".aib/**/*.aib.{yml,yaml}"
             }
         },
@@ -140,7 +151,18 @@
             "type": "command",
             "command": "extension.commandvariable.file.pickFile",
             "args": {
+                "description": "Select the OS image to jumpstart.",
                 "include": ".aib/**/*.{qcow2}"
+            }
+        },
+        {
+            "id": "specs",
+            "type": "command",
+            "command": "extension.commandvariable.file.pickFile",
+            "args": {
+                "description": "Select the spec files to build.",
+                "include": "**/*.{spec}",
+                "multiPick": true
             }
         }
     ]
