@@ -3,7 +3,7 @@
     "tasks": [
         {
             "type": "shell",
-            "command": "dnf clean all && automotive-image-builder build --distro ${input:distro} --mode ${input:mode} --target ${input:target} --export ${input:export} ${input:manifest} $(dirname ${input:manifest})/$(basename ${input:manifest}).${input:distro}-${input:mode}-${input:target}.$(arch).${input:export}",
+            "command": "automotive-image-builder build --distro ${input:distro} --mode ${input:mode} --target ${input:target} --export ${input:export} ${input:manifest} $(dirname ${input:manifest})/$(basename ${input:manifest}).${input:distro}-${input:mode}-${input:target}.$(arch).${input:export}",
             "problemMatcher": [],
             "group": "build",
             "label": "OS Builder",

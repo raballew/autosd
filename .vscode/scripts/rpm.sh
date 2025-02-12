@@ -20,6 +20,8 @@ do
    build $spec
 done
 
+dnf clean all
+
 mkdir -p /var/tmp/local_repo
 cp -rp ~/rpmbuild/RPMS/* /var/tmp/local_repo
 createrepo /var/tmp/local_repo
