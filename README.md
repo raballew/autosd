@@ -52,8 +52,8 @@
 3.  Choose `RPM Builder` and configure the following options:
     *   `executable/myexec.spec`
 4.  Wait for the RPM package to build. This may take a few minutes.
-5.  Once the build is complete, the RPM package will be available in local repository at `/var/tmp/local_repo` directory.
-6.  Modify [.aib/debug.aib.yml](.aib/debug.aib.yml) to include the following lines and then run [build the OS image again](#build-os-image):
+5.  Once the build is complete, the RPM package will be available in the local repository at `/var/tmp/local_repo`.
+6.  Modify [.aib/debug.aib.yml](.aib/debug.aib.yml) to include the following lines and then [build the OS image again](#build-os-image):
 
 ```
 content:
