@@ -42,6 +42,13 @@ RUN dnf install -y \
     dnf install -y --nogpgcheck \
     android-tools\
     osbuild-auto \
+    # RPM packaging tools
+    rpmdevtools \
+    createrepo \
+    rpm-build \
+    rpm-devel \
+    cmake \
+    boost-devel \
     # Dependencies to run a VM
     qemu-kvm \
     swtpm \
