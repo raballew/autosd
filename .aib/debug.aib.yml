@@ -15,6 +15,11 @@ content:
       text: |
         [Container]
         PublishPort=3456:3456
+    - path: /etc/containers/systemd/qm.container.d/nginx.conf
+      text: |
+        [Container]
+        PublishPort=8080:8080
+        PublishPort=8081:8081
     - path: /usr/lib/systemd/system/gdbserver-asil.service
       text: |
         [Unit]
@@ -65,13 +70,40 @@ content:
 
 qm:
   memory_limit:
-    max: 50%
-    high: 50%
+    max: 10%
+    high: 5%
   content:
     rpms:
       - dnf
       - gdb
       - gdb-gdbserver
+    container_images:
+      - source: docker.io/library/nginx
+        tag: latest
+        name: localhost/nginx
+    add_files:
+      # fix for https://github.com/containers/qm/pull/743
+      - path: /etc/containers/containers.conf
+        text: |
+          oom_score_adj = 750
+          [network]
+          default_subnet="10.89.0.0/16"
+      - path: /etc/containers/systemd/nginx-0.container
+        text: |
+          [Container]
+          Image=localhost/nginx
+          PublishPort=8080:80
+
+          [Install]
+          WantedBy=multi-user.target
+      - path: /etc/containers/systemd/nginx-1.container
+        text: |
+          [Container]
+          Image=localhost/nginx
+          PublishPort=8081:80
+
+          [Install]
+          WantedBy=multi-user.target
 
 network:
   static: {}
