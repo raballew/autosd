@@ -19,10 +19,11 @@ RUN dnf config-manager --set-enabled crb && \
     dnf copr enable -y @centos-automotive-sig/automotive-image-builder-dev && \
     dnf copr enable -y @osbuild/osbuild-stable && \
     dnf copr enable -y @centos-automotive-sig/osbuild-auto && \
-    dnf install -y \
-    automotive-image-builder && \
     dnf install -y --nogpgcheck\
-    epel-release
+    epel-release && \
+    dnf install -y \
+    automotive-image-builder
+
 # enable autosd repositories
 RUN dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${OS_VARIANT}/automotive/$(arch)/packages-main/ && \
     dnf config-manager --add-repo https://buildlogs.centos.org/${OS_VERSION}-${OS_VARIANT}/autosd/$(arch)/packages-main/
