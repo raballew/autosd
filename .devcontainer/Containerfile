@@ -79,8 +79,16 @@ RUN dnf install -y \
     perl-devel \
     python3-devel \
     python3-docutils \
+    python3.11 \
+    python3.11-pip \
+    python3.11-devel \
     gcc-c++ \
     meson \
     ninja-build \
     rsync && \
     dnf clean all 
+
+# install jumpstarter
+RUN python3.11 -m venv ~/.venv/jumpstarter && \
+    source ~/.venv/jumpstarter/bin/activate && \
+    pip3.11 install --extra-index-url https://pkg.jumpstarter.dev/simple jumpstarter-all

@@ -1,11 +1,20 @@
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/raballew/autosd?quickstart=1)
+[![Open in GitHub
+Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/raballew/autosd?quickstart=1)
 
 ## Usage
 
 ### Setup
 
-1.  Once the IDE has started, ensure the Meson root directory is set to `executable/meson.build`.
-2.  Run `git submodule update --init --recursive` to initialize unit test dependencies.
+1.  Fork this repository
+2.  Add [Jumpstarter's client configuration environment
+variables](https://jumpstarter.dev/main/getting-started/configuration/files.html#client-configuration)
+(`JMP_ENDPOINT` and `JMP_TOKEN`) to your [GitHub
+account](https://github.com/settings/codespaces/secrets). Ensure the fork has
+visibility to those.
+2.  Once the IDE has started, ensure the Meson root directory is set to
+    `executable/meson.build`.
+3.  Run `git submodule update --init --recursive` to initialize unit test
+    dependencies.
 
 ### Build OS Image
 
@@ -24,7 +33,8 @@
 1.  Press `Ctrl` + `Shift` + `P`.
 2.  Choose `Tasks: Run Task`.
 3.  Select `Jumpstarter` and choose the desired OS image.
-4.  Wait a few seconds for the OS to start. Once it's running, you should see a terminal prompt: `[root@localhost ~]#`
+4.  Wait a few seconds for the OS to start. Once it's running, you should see a
+    terminal prompt: `[root@localhost ~]#`
 
 ### Develop
 
@@ -34,8 +44,10 @@
     *   [executable/src/myexec.c](executable/src/myexec.c)
     *   [headeronly/include/headeronly.h](headeronly/include/headeronly.h)
     *   [library/src/library.c](library/src/library.c)
-4.  Ensure a [package-based OS image](#build-os-image) is running locally (see [Run OS Image](#run-os-image)).
-5.  Press `F5` to start debugging. Choose whether to debug the application in `QM` or `ASIL`.
+4.  Ensure a [package-based OS image](#build-os-image) is running locally (see
+    [Run OS Image](#run-os-image)).
+5.  Press `F5` to start debugging. Choose whether to debug the application in
+    `QM` or `ASIL`.
 6.  Use the following shortcuts to control the debugger:
     *   `F5`: Continue
     *   `F10`: Step Over
@@ -52,8 +64,10 @@
 3.  Choose `RPM Builder` and configure the following options:
     *   `executable/myexec.spec`
 4.  Wait for the RPM package to build. This may take a few minutes.
-5.  Once the build is complete, the RPM package will be available in the local repository at `/var/tmp/local_repo`.
-6.  Modify [.aib/debug.aib.yml](.aib/debug.aib.yml) to include the following lines and then [build the OS image again](#build-os-image):
+5.  Once the build is complete, the RPM package will be available in the local
+    repository at `/var/tmp/local_repo`.
+6.  Modify [.aib/debug.aib.yml](.aib/debug.aib.yml) to include the following
+    lines and then [build the OS image again](#build-os-image):
 
 ```
 content:
@@ -67,4 +81,5 @@ content:
 ## Next steps
 
 - Learn more about [Meson](docs/meson.md).
-- More information about AutoSD can be found at it's [official documentation](https://sig.centos.org/automotive/getting-started/).
+- More information about AutoSD can be found at it's [official
+  documentation](https://sig.centos.org/automotive/getting-started/).
