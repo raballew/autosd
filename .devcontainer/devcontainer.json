@@ -11,7 +11,8 @@
                 "rioj7.command-variable",
                 "mesonbuild.mesonbuild",
                 "ms-vscode.cpptools",
-                "ms-azuretools.vscode-containers"
+                "ms-azuretools.vscode-containers",
+                "ms-python.python"
             ]
         }
     }

@@ -7,4 +7,16 @@
     "mesonbuild.selectRootDir": true,
     "C_Cpp.default.compileCommands": "/workspaces/autosd/executable/build/compile_commands.json",
     "C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild",
+    "terminal.integrated.profiles.linux": {
+        "bash-venv": {
+            "path": "bash",
+            "args": [
+                "-c",
+                "source ~/.venv/jumpstarter/bin/activate && exec bash"
+            ],
+            "overrideName": true,
+            "icon": "terminal-bash"
+        }
+    },
+    "terminal.integrated.defaultProfile.linux": "bash-venv"
 }
