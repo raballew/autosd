@@ -17,7 +17,7 @@ visibility to those.
 ### Build OS Image
 
 1.  Press `Ctrl` + `Shift` + `P`.
-2.  Select `Tasks: Run Build Task`.
+2.  Select `Tasks: Run Task`.
 3.  Choose `OS Builder` and configure the following options:
     *   `cs9`
     *   `package`
@@ -58,7 +58,7 @@ visibility to those.
 ### Build RPM
 
 1.  Press `Ctrl` + `Shift` + `P`.
-2.  Select `Tasks: Run Build Task`.
+2.  Select `Tasks: Run Task`.
 3.  Choose `RPM Builder` and configure the following options:
     *   `executable/myexec.spec`
 4.  Wait for the RPM package to build. This may take a few minutes.

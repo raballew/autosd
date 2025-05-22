@@ -6,11 +6,5 @@
     "mesonbuild.formatting.enabled": true,
     "mesonbuild.selectRootDir": true,
     "C_Cpp.default.compileCommands": "/workspaces/autosd/executable/build/compile_commands.json",
-    "C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild",
-    "python.defaultInterpreterPath": "~/.venv/jumpstarter/bin/python3.11",
-    "python.terminal.activateEnvironment": true,
-    "python.terminal.activateEnvInCurrentTerminal": true,
-    "python.terminal.launchArgs": [],
-    "python.terminal.executeInFileDir": true,
-    "python.languageServer": "Pylance",
+    "C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild"
 }

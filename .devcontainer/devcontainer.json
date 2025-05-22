@@ -4,16 +4,14 @@
     },
     "privileged": true,
     "postCreateCommand": "ssh-keygen -t ed25519 -q -f ~/.ssh/debug -N ''",
-    "postStartCommand": "for i in $(seq $(losetup -ln | wc -l) $(($(losetup -ln | wc -l) + 16))); do rm -rf /dev/loop$i; mknod -m0660 /dev/loop$i b 7 $i; chown root.disk /dev/loop$i; done",
-    "postAttachCommand": "git submodule update --init --recursive",
+    "postStartCommand": "for i in $(seq $(losetup -ln | wc -l) $(($(losetup -ln | wc -l) + 16))); do rm -rf /dev/loop$i; mknod -m0660 /dev/loop$i b 7 $i; chown root.disk /dev/loop$i; done && git submodule update --init --recursive && envsubst < .devcontainer/default.yaml > ~/.config/jumpstarter/clients/default.yaml && rm -f ~/.config/jumpstarter/config.yaml && cp .devcontainer/config.yaml ~/.config/jumpstarter/config.yaml",
     "customizations": {
         "vscode": {
             "extensions": [
                 "rioj7.command-variable",
                 "mesonbuild.mesonbuild",
                 "ms-vscode.cpptools",
-                "ms-azuretools.vscode-containers",
-                "ms-python.python"
+                "ms-azuretools.vscode-containers"
             ]
         }
     }
