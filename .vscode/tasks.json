@@ -103,7 +103,7 @@
             "id": "distro",
             "description": "Select the distribution to build.",
             "type": "pickString",
-            "default": "cs9",
+            "default": "autosd",
             "options": [
                 "cs9",
                 "autosd"

@@ -5,6 +5,7 @@
     "privileged": true,
     "postCreateCommand": "ssh-keygen -t ed25519 -q -f ~/.ssh/debug -N ''",
     "postStartCommand": "for i in $(seq $(losetup -ln | wc -l) $(($(losetup -ln | wc -l) + 16))); do rm -rf /dev/loop$i; mknod -m0660 /dev/loop$i b 7 $i; chown root.disk /dev/loop$i; done",
+    "postAttachCommand": "git submodule update --init --recursive",
     "customizations": {
         "vscode": {
             "extensions": [

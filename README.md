@@ -8,18 +8,16 @@ Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/rab
 1.  Fork this repository
 2.  Add [Jumpstarter's client configuration environment
 variables](https://jumpstarter.dev/main/getting-started/configuration/files.html#client-configuration)
-(`JMP_ENDPOINT` and `JMP_TOKEN`) to your [GitHub
+(`JMP_ENDPOINT`, `JMP_NAME`, `JMP_NAMESPACE`, `JMP_TOKEN`) to your [GitHub
 account](https://github.com/settings/codespaces/secrets). Ensure the fork has
 visibility to those.
 2.  Once the IDE has started, ensure the Meson root directory is set to
     `executable/meson.build`.
-3.  Run `git submodule update --init --recursive` to initialize unit test
-    dependencies.
 
 ### Build OS Image
 
 1.  Press `Ctrl` + `Shift` + `P`.
-2.  Select `Tasks: Run Task`.
+2.  Select `Tasks: Run Build Task`.
 3.  Choose `OS Builder` and configure the following options:
     *   `cs9`
     *   `package`
@@ -60,7 +58,7 @@ visibility to those.
 ### Build RPM
 
 1.  Press `Ctrl` + `Shift` + `P`.
-2.  Select `Tasks: Run Task`.
+2.  Select `Tasks: Run Build Task`.
 3.  Choose `RPM Builder` and configure the following options:
     *   `executable/myexec.spec`
 4.  Wait for the RPM package to build. This may take a few minutes.
