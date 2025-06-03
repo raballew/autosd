@@ -121,21 +121,29 @@
         },
         {
             "id": "target",
-            "description": "Select the build target.",
-            "type": "pickString",
-            "default": "qemu",
-            "options": [
-                "qemu"
-            ]
+            "type": "command",
+            "command": "extension.commandvariable.pickStringRemember",
+            "args": {
+                "description": "Select the target.",
+                "key": "target-name",
+                "fileName": "${workspaceFolder}/.vscode/inputs.json",
+                "fileFormat": "json",
+                "jsonOption": {
+                    "label": "content.targets[__itemIdx__].name",
+                    "value": {
+                        "target-name": "content.targets[__itemIdx__].name",
+                        "target-export": "content.targets[__itemIdx__].export",
+                    }
+                }
+            }
         },
         {
             "id": "export",
-            "description": "Select the export format.",
-            "type": "pickString",
-            "default": "qcow2",
-            "options": [
-                "qcow2"
-            ]
+            "type": "command",
+            "command": "extension.commandvariable.remember",
+            "args": {
+                "key": "target-export"
+            }
         },
         {
             "id": "manifest",

@@ -1,0 +1,36 @@
+{
+    "targets": [
+        {
+            "name": "qemu",
+            "export": "qcow2"
+        },
+        {
+            "name": "aws",
+            "export": "image"
+        },
+        {
+            "name": "rcar_s4",
+            "export": "image"
+        },
+        {
+            "name": "beagleplay",
+            "export": "image"
+        },
+        {
+            "name": "am62sk",
+            "export": "image"
+        },
+        {
+            "name": "am69sk",
+            "export": "image"
+        },
+        {
+            "name": "tda4vm_sk",
+            "export": "image"
+        },
+        {
+            "name": "j784s4evm",
+            "export": "image"
+        }
+    ]
+}
