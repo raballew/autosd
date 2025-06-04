@@ -89,6 +89,6 @@ RUN dnf install -y \
     dnf clean all 
 
 # install jumpstarter
-RUN pip3.11 install --extra-index-url https://pkg.jumpstarter.dev/main jumpstarter-all && \
+RUN pip3.11 install --extra-index-url https://pkg.jumpstarter.dev/main/simple jumpstarter-all==0.7.0.dev0 && \
     mkdir -p "${HOME}/.config/jumpstarter" && \
     sudo mkdir /etc/jumpstarter
