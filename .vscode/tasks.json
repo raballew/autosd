@@ -159,8 +159,9 @@
             "type": "command",
             "command": "extension.commandvariable.file.pickFile",
             "args": {
-                "description": "Select the OS image to jumpstart.",
-                "include": ".aib/**/*.{qcow2}"
+                "description": "Select the OS image to launch.",
+                "exclude": ".aib/**/*.{yml,yaml}",
+                "include": ".aib/**/*"
             }
         },
         {

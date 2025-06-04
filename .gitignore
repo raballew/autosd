@@ -1,3 +1,7 @@
-**/*.qcow2
+.aib/**/*
+!.aib/**/*.yml
+!.aib/**/*.yaml
+
 .tpm2_state
+
 **/*.tar.gz
